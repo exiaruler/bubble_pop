@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 class Coordinates:UIButton {
+    // storage of bubbles that are spawned
     var bubbleStorage : [Bubble] = []
+    // bubble pop chain
     var chain : [String] = []
 
     func addBubble(object:Bubble){
@@ -34,10 +36,11 @@ class Coordinates:UIButton {
     
     
     func removeBubbleScoring(i:Bubble)->(Double,String){
+        /*
         if checkBubbleOverlap(x: i.xPosition, y: i.yPosition){
             print("overlap")
         }
-       
+       */
         var select = -1
             chain.append(i.colour)
         for item in bubbleStorage {
@@ -53,6 +56,7 @@ class Coordinates:UIButton {
         return (0,"")
     }
     func checkBubbleOverlap(x:Int,y:Int)->Bool{
+        
         if !bubbleStorage.isEmpty  {
         for item in bubbleStorage {
             if sortXY(x: x, y: y, listX: item.xPosition, listY: item.yPosition){
@@ -67,24 +71,31 @@ class Coordinates:UIButton {
         
     }
     
-    func distanceMeasure(input:Int,list:Int)->Bool{
+    func distanceMeasureCheck(input:Int,list:Int)->Bool{
         let sum = input - list
-        if sum <= 30 && sum >= 0{
-          
+        // check distance between plan spawned and existing is equal or less
+        if sum <= 100 && sum >= 0{
      return true
         }
         return false
     }
+    func distanceMeasure(input:Int,list:Int)->Int{
+        let sum = input - list
+        // check distance between plan spawned and existing is equal or less
+     return sum
+    }
 
     // sort value from the highest coordinates and lowest to find a similar match
     func sortXY(x:Int,y:Int,listX:Int,listY:Int)->Bool{
-            if distanceMeasure(input: x, list: listX) || distanceMeasure(input: x, list: listY){
+        var storage: [Int] = []
+        // checks distances to determine bubble spawned position with existing bubbles
+            if distanceMeasureCheck(input: x, list: listX) && distanceMeasureCheck(input: x, list: listY){
             return true
-          //  return (highestX,highestY,lowestX,lowestY)
+         
             }else {
-            if distanceMeasure(input: listX, list: x) || distanceMeasure(input: listY, list: x){
+            if distanceMeasureCheck(input: listX, list: x) && distanceMeasureCheck(input: listY, list: x){
                 return true
-          //  return (highestX,highestY,lowestX,lowestY)
+    
             }
             }
         
@@ -107,17 +118,13 @@ class Coordinates:UIButton {
     }
     
     func checkChainLoop(colour:String)->Bool{
-        var previousValue:String = ""
-       var test = lastItemChain()
+       // loops over array to find mismatch of colour in array
         if chain.count > 2 {
-  
-            if previousValue.isEmpty {
-                previousValue = lastItemChain()
-            }
-            
-            if !colour.contains(previousValue){
-                chain.removeAll()
-                return false
+            for item in chain {
+                if !colour.contains(item){
+                    chain.removeAll()
+                    return false
+                }
             }
         }
         
@@ -127,26 +134,9 @@ class Coordinates:UIButton {
         }
         return false
     }
-    func lastItemChain()->String{
-        var select = 0
-        for item in chain {
-            select += 1
-            if select == 2 {
-                return item
-            }
-        }
-        return ""
-    }
     
-    func test(colour:String) {
-        let chainSize = chain.count
-        
-        for item in chain {
-            if !colour.contains(item){
-                chain.removeAll()
-            }
-        }
-    }
+    
+ 
     
     
 }

@@ -10,12 +10,11 @@ import UIKit
 class GameSettingViewController: UIViewController {
 
     @IBOutlet weak var nameField: UITextField!
-    
-    @IBOutlet weak var timerSlider: UISlider!
-    
+    @IBOutlet weak var timeSlider: UISlider!
     @IBOutlet weak var timerText: UILabel!
     
     @IBOutlet weak var bubbleSlider: UISlider!
+    @IBOutlet weak var bubbleText: UILabel!
     
     override func viewDidLoad() {
        
@@ -29,11 +28,19 @@ class GameSettingViewController: UIViewController {
             let VC = segue.destination as! GameViewController
             VC.name = nameField.text!
            VC.bubbleSpawn = Int(bubbleSlider.value)
-            VC.time = Int(timerSlider.value)
+            VC.time = Int(timeSlider.value)
         }
     }
     
+    @IBAction func bubbleAdjust(_ sender: UISlider) {
+        let value = sender.value
+        var game = GameViewController()
+        //bubbleText.text = "\(value)"
+        game.bubbleSpawn = Int(value)
+        bubbleText.text = "\(game.bubbleSpawn)"
+    }
 
+   
     
 
 

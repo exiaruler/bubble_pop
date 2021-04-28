@@ -15,7 +15,7 @@ class Bubble: UIButton {
     //50
     //bubble postion
     let xPosition = Int.random(in: 20...300)
-    let yPosition = Int.random(in: 50...650)
+    let yPosition = Int.random(in: 100...650)
    
     
     // spawn random colour of bubble
@@ -49,6 +49,12 @@ class Bubble: UIButton {
         springAnimation.damping = 1
         layer.add(springAnimation, forKey: nil)
     }
+    func bubbleDisapear() {
+        let springAnimation = CAKeyframeAnimation (keyPath: "transform.scale")
+        springAnimation.duration = 0.6
+        springAnimation.repeatCount = 1
+        layer.add(springAnimation, forKey: nil)
+    }
     
   
     func flash() {
@@ -63,7 +69,7 @@ class Bubble: UIButton {
         
         layer.add(flash, forKey: nil)
     }
-    
+    // spawning rates of bubbles
     func colourSpawn(){
     switch randomColor {
     case 0...40:
