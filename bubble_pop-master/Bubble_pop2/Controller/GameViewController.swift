@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
     var score = 0;
     var name = "test"
     var time = 60
-    var bubbleSpawn = 2
+    var bubbleSpawn = 15
     var timer = Timer()
     var bubbleGone = 3
     var chain:[Int] = []
@@ -56,7 +56,7 @@ class GameViewController: UIViewController {
     }
     //removes bubble off screen
     @objc func despawnBubble(){
-        let randomRemoval = Int.random(in: 1...5)
+        let randomRemoval = Int.random(in: 1...3)
         // count down
        bubbleGone -= 1
         // if hit 0
@@ -71,18 +71,16 @@ class GameViewController: UIViewController {
     }
     
     @objc func bubbleGenerate(){
-       let bubble = Bubble()
+        let bubble = Bubble()
       print(  coordinates.bubbleStorage.count)
     // check if can spawn bubble in that position
-        if !coordinates.checkBubble(x: bubble.xPosition, y: bubble.yPosition) && coordinates.bubbleStorage.count <= 15{
+        if !coordinates.checkBubble(x: bubble.xPosition, y: bubble.yPosition) && coordinates.bubbleStorage.count <= 15 && !coordinates.checkBubbleOverlap(x: bubble.xPosition, y: bubble.yPosition){
             bubble.animation()
             // add current bubble to array
             coordinates.addBubble(object: bubble)
             bubble.addTarget(self, action: #selector(bubblePressed), for: .touchUpInside)
             self.view.addSubview(bubble)
           //  print(bubble.frame)
-            
-            
         }
       //  print(coordinates.coordinates)
        
@@ -103,14 +101,14 @@ class GameViewController: UIViewController {
         sender.removeFromSuperview()
         // get bubble point value and add to score
         let value = coordinates.removeBubbleScoring(i: sender as! Bubble)
-        if coordinates.chain.count > 2 && coordinates.checkChainLoop(colour: value.1){
+        if coordinates.checkChainLoop(colour: value.1) {
+            let add = value.0 * 1.5
+            print(add.rounded())
+            score += Int(add.rounded())
+            scoreLabel.text = String (score)
+        }else {
             score += Int(value.0)
         scoreLabel.text = String (score)
-        }else {
-            let add = value.0.rounded()
-            print(add)
-            score += Int(add)
-            scoreLabel.text = String (score)
         }
         print(sender)
     }

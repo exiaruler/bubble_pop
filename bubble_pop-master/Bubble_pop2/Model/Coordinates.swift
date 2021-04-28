@@ -53,16 +53,10 @@ class Coordinates:UIButton {
         return (0,"")
     }
     func checkBubbleOverlap(x:Int,y:Int)->Bool{
-        if !bubbleStorage.isEmpty {
+        if !bubbleStorage.isEmpty  {
         for item in bubbleStorage {
-            let i = sortXY(x: x, y: y, listX: item.xPosition, listY: item.yPosition)
-            //   print("\(x) and \(y)")
-             //  print("\(item.xPosition) and \(item.yPosition)")
-            let a = (i.0,i.1)
-            let b = (i.2,i.3)
-          //  print("\(a) and \(b)")
-            if a > b{
-                print(item.colour)
+            if sortXY(x: x, y: y, listX: item.xPosition, listY: item.yPosition){
+                print("\(x),\(y) and \(item)")
             
                 return true
             }
@@ -75,7 +69,7 @@ class Coordinates:UIButton {
     
     func distanceMeasure(input:Int,list:Int)->Bool{
         let sum = input - list
-        if sum <= 60 && sum >= 0{
+        if sum <= 30 && sum >= 0{
           
      return true
         }
@@ -83,34 +77,24 @@ class Coordinates:UIButton {
     }
 
     // sort value from the highest coordinates and lowest to find a similar match
-    func sortXY(x:Int,y:Int,listX:Int,listY:Int)->(Int,Int,Int,Int){
-        var highestX = 0
-        var highestY = 0
-        
-        var lowestX = 0
-        var lowestY = 0
-        if x > listX && y > listY {
-            if distanceMeasure(input: x, list: listX) && distanceMeasure(input: x, list: listY){
-            highestX = x
-            highestY = y
-            lowestX = listX
-            lowestY = listY
-            return (highestX,highestY,lowestX,lowestY)
+    func sortXY(x:Int,y:Int,listX:Int,listY:Int)->Bool{
+            if distanceMeasure(input: x, list: listX) || distanceMeasure(input: x, list: listY){
+            return true
+          //  return (highestX,highestY,lowestX,lowestY)
+            }else {
+            if distanceMeasure(input: listX, list: x) || distanceMeasure(input: listY, list: x){
+                return true
+          //  return (highestX,highestY,lowestX,lowestY)
             }
-        } else{
-            if listX > x && listY > y{
-            if distanceMeasure(input: listX, list: x) && distanceMeasure(input: listY, list: x){
-            highestX = listX
-            highestY = listY
-            lowestX = x
-            lowestY = y
-            return (highestX,highestY,lowestX,lowestY)
             }
-        }
-        }
-    return (0,0,0,0)
-     
         
+        return false
+    }
+    
+    func repositionBubbleCoor(x:Int,y:Int)->(Int,Int){
+        var a = x + 100
+        var b = y + 100
+        return (a,b)
     }
     
     func checkBubble(x:Int,y:Int)->Bool{
@@ -124,21 +108,48 @@ class Coordinates:UIButton {
     
     func checkChainLoop(colour:String)->Bool{
         var previousValue:String = ""
-        for item in chain {
+       var test = lastItemChain()
+        if chain.count > 2 {
+  
             if previousValue.isEmpty {
-                previousValue = item
+                previousValue = lastItemChain()
             }
-            if item.contains(previousValue){
-                previousValue = item
-            }
-            if !item.contains(colour){
-                return true
+            
+            if !colour.contains(previousValue){
+                chain.removeAll()
+                return false
             }
         }
-        chain.removeAll()
+        
+        if chain.count > 2 {
+        chain.removeLast()
+            return true
+        }
         return false
     }
-
+    func lastItemChain()->String{
+        var select = 0
+        for item in chain {
+            select += 1
+            if select == 2 {
+                return item
+            }
+        }
+        return ""
+    }
+    
+    func test(colour:String) {
+        let chainSize = chain.count
+        
+        for item in chain {
+            if !colour.contains(item){
+                chain.removeAll()
+            }
+        }
+    }
+    
+    
+}
     /*
     func findBubbleColour(i:Bubble)->String{
         var select = -1
@@ -155,4 +166,4 @@ class Coordinates:UIButton {
     
     */
     
-}
+

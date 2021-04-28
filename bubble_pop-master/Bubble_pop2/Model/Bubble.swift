@@ -15,7 +15,7 @@ class Bubble: UIButton {
     //50
     //bubble postion
     let xPosition = Int.random(in: 20...300)
-    let yPosition = Int.random(in: 50...600)
+    let yPosition = Int.random(in: 50...650)
    
     
     // spawn random colour of bubble
