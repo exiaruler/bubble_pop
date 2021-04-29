@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FC27A1302633414B002AA720 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27A12F2633414B002AA720 /* Bubble.swift */; };
 		FC27A14C2633FD17002AA720 /* GameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27A14B2633FD17002AA720 /* GameSettingViewController.swift */; };
-		FC27A151263402FB002AA720 /* ScoreboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27A150263402FB002AA720 /* ScoreboardViewController.swift */; };
 		FC27A15926342A72002AA720 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27A15826342A72002AA720 /* GameViewController.swift */; };
 		FC27A16A2636B18E002AA720 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC27A1692636B18E002AA720 /* Coordinates.swift */; };
 		FC41AC432632A2D8008314B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC41AC422632A2D8008314B6 /* AppDelegate.swift */; };
@@ -20,6 +19,7 @@
 		FC41AC4F2632A2DC008314B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC41AC4D2632A2DC008314B6 /* LaunchScreen.storyboard */; };
 		FC41AC5A2632A2DD008314B6 /* Bubble_pop2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC41AC592632A2DD008314B6 /* Bubble_pop2Tests.swift */; };
 		FC41AC652632A2DD008314B6 /* Bubble_pop2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC41AC642632A2DD008314B6 /* Bubble_pop2UITests.swift */; };
+		FCE57AF7263A515B00431BEC /* ScoreBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE57AF6263A515B00431BEC /* ScoreBoardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,6 @@
 /* Begin PBXFileReference section */
 		FC27A12F2633414B002AA720 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		FC27A14B2633FD17002AA720 /* GameSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingViewController.swift; sourceTree = "<group>"; };
-		FC27A150263402FB002AA720 /* ScoreboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardViewController.swift; sourceTree = "<group>"; };
 		FC27A15826342A72002AA720 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		FC27A1692636B18E002AA720 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		FC41AC3F2632A2D8008314B6 /* Bubble_pop2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bubble_pop2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +58,7 @@
 		FC41AC602632A2DD008314B6 /* Bubble_pop2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bubble_pop2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC41AC642632A2DD008314B6 /* Bubble_pop2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble_pop2UITests.swift; sourceTree = "<group>"; };
 		FC41AC662632A2DD008314B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCE57AF6263A515B00431BEC /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBoardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +100,8 @@
 			children = (
 				FC41AC462632A2D8008314B6 /* ViewController.swift */,
 				FC27A14B2633FD17002AA720 /* GameSettingViewController.swift */,
-				FC27A150263402FB002AA720 /* ScoreboardViewController.swift */,
 				FC27A15826342A72002AA720 /* GameViewController.swift */,
+				FCE57AF6263A515B00431BEC /* ScoreBoardViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -298,10 +298,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC27A15926342A72002AA720 /* GameViewController.swift in Sources */,
-				FC27A151263402FB002AA720 /* ScoreboardViewController.swift in Sources */,
 				FC41AC472632A2D8008314B6 /* ViewController.swift in Sources */,
 				FC41AC432632A2D8008314B6 /* AppDelegate.swift in Sources */,
 				FC27A14C2633FD17002AA720 /* GameSettingViewController.swift in Sources */,
+				FCE57AF7263A515B00431BEC /* ScoreBoardViewController.swift in Sources */,
 				FC41AC452632A2D8008314B6 /* SceneDelegate.swift in Sources */,
 				FC27A1302633414B002AA720 /* Bubble.swift in Sources */,
 				FC27A16A2636B18E002AA720 /* Coordinates.swift in Sources */,

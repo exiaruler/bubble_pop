@@ -14,8 +14,8 @@ class Bubble: UIButton {
     //20
     //50
     //bubble postion
-    let xPosition = Int.random(in: 20...300)
-    let yPosition = Int.random(in: 100...650)
+    var xPosition = Int.random(in: 10...290)
+    var yPosition = Int.random(in: 100...720)
    
     
     // spawn random colour of bubble
@@ -33,11 +33,11 @@ class Bubble: UIButton {
     
     func bubbleDim(){
         colourSpawn()
-        self.frame = CGRect(x: xPosition, y: yPosition, width: 100, height: 100)
+      self.frame = CGRect(x: xPosition, y: yPosition, width: 90, height: 90)
         self.layer.cornerRadius = 0.5 * self.bounds.size.width
         
     }
-    
+   
   
     func animation() {
         let springAnimation = CASpringAnimation(keyPath: "transform.scale")

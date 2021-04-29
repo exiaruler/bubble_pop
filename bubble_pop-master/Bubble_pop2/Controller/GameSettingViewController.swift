@@ -15,30 +15,34 @@ class GameSettingViewController: UIViewController {
     
     @IBOutlet weak var bubbleSlider: UISlider!
     @IBOutlet weak var bubbleText: UILabel!
-    
+    let game = GameViewController()
     override func viewDidLoad() {
-       
         super.viewDidLoad()
-
+       // self.test()
         // Do any additional setup after loading the view.
+    
     }
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToGame" {
-            let VC = segue.destination as! GameViewController
-            VC.name = nameField.text!
-           VC.bubbleSpawn = Int(bubbleSlider.value)
-            VC.time = Int(timeSlider.value)
+            let game = segue.destination as! GameViewController
+        game.name = nameField.text!
+         
+            game.time = Int(timeSlider.value)
+            game.bubbleSpawn = Int(bubbleSlider.value)
+            
+
         }
     }
     
     @IBAction func bubbleAdjust(_ sender: UISlider) {
         let value = sender.value
-        var game = GameViewController()
-        //bubbleText.text = "\(value)"
-        game.bubbleSpawn = Int(value)
+        let game = GameViewController()
+        game.bubbleSpawn = Int(bubbleSlider.value)
         bubbleText.text = "\(game.bubbleSpawn)"
     }
+    
+   
 
    
     
