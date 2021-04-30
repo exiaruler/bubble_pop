@@ -19,6 +19,8 @@
 		FC41AC4F2632A2DC008314B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC41AC4D2632A2DC008314B6 /* LaunchScreen.storyboard */; };
 		FC41AC5A2632A2DD008314B6 /* Bubble_pop2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC41AC592632A2DD008314B6 /* Bubble_pop2Tests.swift */; };
 		FC41AC652632A2DD008314B6 /* Bubble_pop2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC41AC642632A2DD008314B6 /* Bubble_pop2UITests.swift */; };
+		FC7972EF263BD5B400859BD1 /* noob.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FC7972EE263BD5B400859BD1 /* noob.mp3 */; };
+		FC7972F4263BD5BB00859BD1 /* movie_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FC7972F3263BD5BB00859BD1 /* movie_1.mp3 */; };
 		FCE57AF7263A515B00431BEC /* ScoreBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE57AF6263A515B00431BEC /* ScoreBoardViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,8 @@
 		FC41AC602632A2DD008314B6 /* Bubble_pop2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bubble_pop2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC41AC642632A2DD008314B6 /* Bubble_pop2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble_pop2UITests.swift; sourceTree = "<group>"; };
 		FC41AC662632A2DD008314B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC7972EE263BD5B400859BD1 /* noob.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = noob.mp3; path = ../../../../../../../../../Downloads/noob.mp3; sourceTree = "<group>"; };
+		FC7972F3263BD5BB00859BD1 /* movie_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = movie_1.mp3; path = ../../../../../../../../../Downloads/movie_1.mp3; sourceTree = "<group>"; };
 		FCE57AF6263A515B00431BEC /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBoardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,10 +133,11 @@
 		FC41AC412632A2D8008314B6 /* Bubble_pop2 */ = {
 			isa = PBXGroup;
 			children = (
+				FC7972ED263BD5A000859BD1 /* Sound Assets */,
+				FC7972EC263BD4B100859BD1 /* View */,
 				FC27A13A263342A7002AA720 /* Controller */,
 				FC27A12E26334107002AA720 /* Navigation Control */,
 				FC41AC752632AC26008314B6 /* Model */,
-				FC41AC482632A2D8008314B6 /* Main.storyboard */,
 				FC41AC4B2632A2DC008314B6 /* Assets.xcassets */,
 				FC41AC4D2632A2DC008314B6 /* LaunchScreen.storyboard */,
 				FC41AC502632A2DC008314B6 /* Info.plist */,
@@ -165,6 +170,23 @@
 				FC27A1692636B18E002AA720 /* Coordinates.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FC7972EC263BD4B100859BD1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FC41AC482632A2D8008314B6 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FC7972ED263BD5A000859BD1 /* Sound Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FC7972F3263BD5BB00859BD1 /* movie_1.mp3 */,
+				FC7972EE263BD5B400859BD1 /* noob.mp3 */,
+			);
+			path = "Sound Assets";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +292,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7972F4263BD5BB00859BD1 /* movie_1.mp3 in Resources */,
+				FC7972EF263BD5B400859BD1 /* noob.mp3 in Resources */,
 				FC41AC4F2632A2DC008314B6 /* LaunchScreen.storyboard in Resources */,
 				FC41AC4C2632A2DC008314B6 /* Assets.xcassets in Resources */,
 				FC41AC4A2632A2D8008314B6 /* Main.storyboard in Resources */,

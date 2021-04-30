@@ -8,11 +8,10 @@
 import UIKit
 
 class Bubble: UIButton {
-   
+   // variables of bubble
     var value:Double = 0
     var colour:String = ""
-    //20
-    //50
+  
     //bubble postion
     var xPosition = Int.random(in: 10...290)
     var yPosition = Int.random(in: 100...720)
@@ -31,6 +30,7 @@ class Bubble: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // bubble dimensions
     func bubbleDim(){
         colourSpawn()
       self.frame = CGRect(x: xPosition, y: yPosition, width: 90, height: 90)
@@ -38,7 +38,7 @@ class Bubble: UIButton {
         
     }
    
-  
+  // animation of spawnining
     func animation() {
         let springAnimation = CASpringAnimation(keyPath: "transform.scale")
         springAnimation.duration = 0.6
@@ -69,7 +69,8 @@ class Bubble: UIButton {
         
         layer.add(flash, forKey: nil)
     }
-    // spawning rates of bubbles
+    
+    // spawning rates of bubble colours and values
     func colourSpawn(){
     switch randomColor {
     case 0...40:

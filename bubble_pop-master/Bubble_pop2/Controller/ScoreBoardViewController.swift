@@ -14,9 +14,15 @@ class ScoreBoardViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    @IBAction func returnMainPage(_ sender: UIButton) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        self.navigationController?.popToRootViewController(animated: true)
+        if (segue.identifier == "ScoreBoardViewController" ){
+            // show main menu
+            let vc = storyboard?.instantiateViewController(identifier: "ScoreBoardViewController") as! ViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+            vc.navigationItem.setHidesBackButton(true, animated: true)
+            
+        }
     }
 
 }

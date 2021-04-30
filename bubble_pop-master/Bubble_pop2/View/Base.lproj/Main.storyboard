@@ -51,6 +51,14 @@
                     <view key="view" contentMode="scaleToFill" id="wEW-hb-beP">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2q-Om-Dmn">
+                                <rect key="frame" x="91" y="655" width="209" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                <state key="normal" title="Main Menu"/>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="TRG-PP-1nq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -58,7 +66,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="boa-TY-BFD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="883"/>
+            <point key="canvasLocation" x="2860" y="945"/>
         </scene>
         <!--Game Setting View Controller-->
         <scene sceneID="rRR-2Z-5l8">
@@ -207,6 +215,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHK-G3-Pn1">
+                                <rect key="frame" x="85" y="535" width="249" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="ScoreBoard"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JNF-x0-Akv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -214,6 +228,7 @@
                     <navigationItem key="navigationItem" id="deG-J0-wgU"/>
                     <connections>
                         <outlet property="countDownLabel" destination="SWr-tP-gkO" id="jyg-Px-keH"/>
+                        <outlet property="scoreButton" destination="SHK-G3-Pn1" id="9bh-Ld-JK6"/>
                         <outlet property="scoreLabel" destination="0BH-cV-TJN" id="QTk-J2-YKQ"/>
                         <outlet property="timeLabel" destination="8Wg-jt-c1A" id="g3W-mc-jTP"/>
                     </connections>

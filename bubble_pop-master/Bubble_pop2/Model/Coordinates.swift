@@ -13,11 +13,12 @@ class Coordinates:UIButton {
     // bubble pop chain
     var chain : [String] = []
 
+    // add bubble
     func addBubble(object:Bubble){
         bubbleStorage.append(object)
     }
     
-    
+    // selects random bubble and removes it for random bubble removal
     func randomBubble()->Bubble?{
         var select = -1
         let count = bubbleStorage.count
@@ -34,10 +35,8 @@ class Coordinates:UIButton {
     }
    
     
-    
+    // removes and returns bubble point value and colour after being pressed
     func removeBubbleScoring(i:Bubble)->(Double,String){
-        
-      
         var select = -1
             chain.append(i.colour)
         for item in bubbleStorage {
@@ -47,44 +46,20 @@ class Coordinates:UIButton {
                 return (item.value,item.colour)
             }
         }
-        
-        
-        
         return (0,"")
     }
-
+    // checks bubble if it overlaps existing bubbles in storage
     func checkBubbleOverlap(object:Bubble)->Bool{
-        
         if !bubbleStorage.isEmpty  {
         for item in bubbleStorage {
-            
             if object.frame.intersects(item.frame){
-      //          print("\(object) and \(item)")
-            
                 return true
             }
-     
         }
         }
         return false
-        
     }
-    func getBubbleOverLap(object:Bubble)->Bool{
-        
-        if !bubbleStorage.isEmpty  {
-        for item in bubbleStorage {
-            
-            if object.frame.intersects(item.frame){
-                print("\(object) and \(item)")
-            
-                return true
-            }
-     
-        }
-        }
-        return false
-        
-    }
+   
     
     func repostionUpward(object:Bubble)->Bubble{
         let xRange = object.xPosition
@@ -98,10 +73,13 @@ class Coordinates:UIButton {
     
     // Creates new coordinates using previous bubble coordinates as base
     func repostionDownward(object:Bubble)->Bubble{
+        // state stable varriables
         let xRange = object.xPosition
         let yRange = object.yPosition
+        // random new coordinates
         let newX = Int.random(in: 10...xRange)
         let newY = Int.random(in: 100...yRange)
+        // replace those coordinates
              object.xPosition = newX
              object.yPosition = newY
     return object
@@ -109,6 +87,7 @@ class Coordinates:UIButton {
     
     // check bubble if there a same set of existing coordinates
     func checkBubble(x:Int,y:Int)->Bool{
+        // loops over items in the bubble storage to check if there a match
         for item in bubbleStorage{
             if x == item.xPosition && y == item.yPosition{
                 return true
@@ -125,18 +104,30 @@ class Coordinates:UIButton {
        // loops over array to find mismatch of colour in array
         if chain.count > 2 {
             for item in chain {
+                // if there a different in the array that does not much the previous colour it removes all items in the array
                 if !colour.contains(item){
                     chain.removeAll()
                     return false
                 }
             }
         }
-        // 
+        // if the number of items in chain more than 2 it removes the last item
         if chain.count > 2 {
         chain.removeLast()
             return true
         }
         return false
+    }
+    
+    func gameEnd(){
+        var select = -1
+        for item in bubbleStorage{
+            select += 1
+           // bubbleStorage.remove(at: select)
+            item.removeFromSuperview()
+            bubbleStorage.removeFirst()
+           
+        }
     }
     
     

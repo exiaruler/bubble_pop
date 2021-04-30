@@ -27,7 +27,6 @@ class GameSettingViewController: UIViewController {
         if segue.identifier == "goToGame" {
             let game = segue.destination as! GameViewController
         game.name = nameField.text!
-         
             game.time = Int(timeSlider.value)
             game.bubbleSpawn = Int(bubbleSlider.value)
             
@@ -42,6 +41,12 @@ class GameSettingViewController: UIViewController {
         bubbleText.text = "\(game.bubbleSpawn)"
     }
     
+    @IBAction func timeAdjust(_ sender: UISlider) {
+        let value = sender.value
+        let game = GameViewController()
+        game.time = Int(timeSlider.value)
+        timerText.text = "\(game.time)"
+    }
    
 
    

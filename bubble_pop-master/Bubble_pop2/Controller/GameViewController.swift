@@ -6,14 +6,20 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GameViewController: UIViewController {
     // labels
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var countDownLabel: UILabel!
+    @IBOutlet weak var scoreButton: UIButton!
+    // variables
     
     var coordinates = Coordinates()
+    // audio
+    var bruh = AVAudioPlayer()
+    var nobu = AVAudioPlayer()
     // game variables
     var score = 0;
     var name: String?
@@ -29,51 +35,76 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         print(bubbleSpawn)
+        print(time)
         super.viewDidLoad()
         timeLabel.text = String(time)
         scoreLabel.text = String(score)
-         gameStartUp()
-       
-        
-       
-        stater = Timer.scheduledTimer(withTimeInterval: 1, repeats: false){
-            starting in
-            self.startingCount()
-          
-           
+        let bruhSound = Bundle.main.path(forResource: "movie_1", ofType: "mp3")
+        let nobuSound = Bundle.main.path(forResource: "noob", ofType: "mp3")
+        do {
+            bruh = try AVAudioPlayer(contentsOf:URL(fileURLWithPath: bruhSound!))
+            nobu = try AVAudioPlayer(contentsOf:URL(fileURLWithPath: nobuSound!))
+            
+        } catch{
+            error
         }
+         gameStartUp()
+        //countDownLabel.text = String (countDownStart)
+        //countDownLabel.isHidden = !countDownLabel.isHidden
+        scoreButton.isHidden = !scoreButton.isHidden
       
+       
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){
             timer in
-            //self.startingCount()
             self.countDown()
             self.bubbleSpawning()
             self.despawnBubble()
+            
         }
         // Do any additional setup after loading the view.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if (segue.identifier == "ScoreBoardViewController" ){
+            // show HighScore Screen
+            let vc = storyboard?.instantiateViewController(identifier: "ScoreBoardViewController") as! ScoreBoardViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+            vc.navigationItem.setHidesBackButton(true, animated: true)
+            
+        }
+    }
+    
     // time countdown during game session
     @objc func countDown(){
+    
         time -= 1
         timeLabel.text = String(time)
         
         if time == 0 {
             timer.invalidate()
-            let vc = storyboard?.instantiateViewController(identifier: "ScoreBoardViewController") as! ScoreBoardViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-            vc.navigationItem.setHidesBackButton(true, animated: true)
+            coordinates.gameEnd()
+            scoreButton.isHidden = false
+            
+            
         }
+    }
+    @IBAction func goToScoreBoard(_ sender:UIButton){
+        
     }
     
     @objc func startingCount(){
-   
+        
         countDownStart -= 1
         countDownLabel.text = String(countDownStart)
-        if countDownStart == 0 {
-            countDownLabel.isHidden = !countDownLabel.isHidden
-            stater.invalidate()
+        
+        while countDownStart == 0 {
+            //stater.invalidate()
+       
+            
+          //  countDownLabel.isHidden = !countDownLabel.isHidden
+            
         }
     }
     
@@ -93,13 +124,12 @@ class GameViewController: UIViewController {
             bubbleGoneTimer = 3
         }
     }
-    
+    // creates bubble
     @objc func bubbleGenerate(){
         let bubble = Bubble()
     // check if can spawn bubble in that position
         if !coordinates.checkBubble(x: bubble.xPosition, y: bubble.yPosition) &&
             coordinates.bubbleStorage.count <= 15  && !coordinates.checkBubbleOverlap(object: bubble){
-          
             bubble.animation()
             // add current bubble to array
             coordinates.addBubble(object: bubble)
@@ -108,40 +138,35 @@ class GameViewController: UIViewController {
         }else {
              randomPosition(i: bubble)
         }
-      
-       
-        
-    }
-    func bubbleSpawnPro(){
-        let bubble = Bubble()
-        bubble.animation()
-        // add current bubble to array
-        coordinates.addBubble(object: bubble)
-        bubble.addTarget(self, action: #selector(bubblePressed), for: .touchUpInside)
-        self.view.addSubview(bubble)
 
     }
     
-    
+    // pressing bubble
     @IBAction func bubblePressed(_ sender: UIButton) {
         sender.removeFromSuperview()
         // get bubble point value and add to score
         let value = coordinates.removeBubbleScoring(i: sender as! Bubble)
+     
         // check bubble chain
         if coordinates.checkChainLoop(colour: value.1) {
             // if there a chain multiply point value
+            nobu.play()
             let add = value.0 * 1.5
             print(add.rounded())
             score += Int(add.rounded())
             scoreLabel.text = String (score)
+           
             // if no current chain, normal point value
         }else {
+            bruh.play()
             score += Int(value.0)
         scoreLabel.text = String (score)
+           
         }
-        print(sender)
+       
     }
     
+    // adds bubbles on screen before game starts
     @objc func gameStartUp(){
         while coordinates.bubbleStorage.count != bubbleSpawn{
             bubbleGenerate()
@@ -150,47 +175,18 @@ class GameViewController: UIViewController {
         
     }
     
-    
+    // spawn random number of bubbles
     @objc func bubbleSpawning(){
-        for i in 1...randomBubbleSpawnNum {
+        for _ in 1...randomBubbleSpawnNum {
             bubbleGenerate()
         }
-    }
-    // backup for starter
-    func spawnRow(){
-        var y = 110
-        while coordinates.bubbleStorage.count != 15{
-            let spawn = Int.random(in:2...4)
-            
-            for _ in 1...spawn{
-                let bubble = Bubble()
-                let x = Int.random(in: 10...290)
-                let target = bubble
-            target.xPosition = x
-            target.yPosition = y
-           
-        
-            if !coordinates.checkBubbleOverlap(object: target){
-            target.animation()
-            coordinates.addBubble(object: target)
-            target.addTarget(self, action: #selector(bubblePressed), for: .touchUpInside)
-            self.view.addSubview(target)
-            }else{
-                let newX = Int.random(in: 10...target.xPosition)
-                target.xPosition = newX
-                if !coordinates.checkBubbleOverlap(object: target) {
-                    target.animation()
-                    coordinates.addBubble(object: target)
-                    target.addTarget(self, action: #selector(bubblePressed), for: .touchUpInside)
-                    self.view.addSubview(target)
-                }
-            }
-        }
-            y += 100
+        if time == 0 {
+            coordinates.gameEnd()
         }
     }
-
+   
     
+    // re
     func randomPosition(i:Bubble){
         let random = Int.random(in:0...100)
        
