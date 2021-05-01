@@ -8,21 +8,34 @@
 import UIKit
 
 class ScoreBoardViewController: UIViewController {
-
+    let game = GameViewController()
+    let save = UserDefaults.standard
+    var score:[(String,Int)] = []
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        save.set(score,forKey: "key")
         // Do any additional setup after loading the view.
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if (segue.identifier == "ScoreBoardViewController" ){
-            // show main menu
-            let vc = storyboard?.instantiateViewController(identifier: "ScoreBoardViewController") as! ViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-            vc.navigationItem.setHidesBackButton(true, animated: true)
+    
+    
+    @IBAction func returnMainPage(_ sender: UIButton) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    func sortScore(){
+        let newEntry = (game.name,game.score)
+        if !score.isEmpty {
+        for item in score {
+            if newEntry.1 > item.1 {
+                
+            }
+        }
+        }else {
+         //   score.append((newEntry.0,newEntry.1))
+            save.set(score,forKey: "key")
             
         }
     }
+    
 
 }

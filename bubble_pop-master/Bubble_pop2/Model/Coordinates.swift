@@ -118,12 +118,11 @@ class Coordinates:UIButton {
         }
         return false
     }
-    
+    // removes all bubbles when game ends
     func gameEnd(){
         var select = -1
         for item in bubbleStorage{
             select += 1
-           // bubbleStorage.remove(at: select)
             item.removeFromSuperview()
             bubbleStorage.removeFirst()
            

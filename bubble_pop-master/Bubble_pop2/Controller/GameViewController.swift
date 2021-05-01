@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var countDownLabel: UILabel!
-    @IBOutlet weak var scoreButton: UIButton!
+    
     // variables
     
     var coordinates = Coordinates()
@@ -28,17 +28,18 @@ class GameViewController: UIViewController {
     var bubbleSpawn = 15
     var bubbleStarter = Timer()
     var timer = Timer()
-    var stater = Timer()
+    var starter = Timer()
     var bubbleGoneTimer = 2
     let randomBubbleSpawnNum = Int.random(in: 5...15)
     
 
     override func viewDidLoad() {
-        print(bubbleSpawn)
-        print(time)
+       
         super.viewDidLoad()
+        // components
         timeLabel.text = String(time)
         scoreLabel.text = String(score)
+        // sound effects
         let bruhSound = Bundle.main.path(forResource: "movie_1", ofType: "mp3")
         let nobuSound = Bundle.main.path(forResource: "noob", ofType: "mp3")
         do {
@@ -48,33 +49,24 @@ class GameViewController: UIViewController {
         } catch{
             error
         }
-         gameStartUp()
-        //countDownLabel.text = String (countDownStart)
-        //countDownLabel.isHidden = !countDownLabel.isHidden
-        scoreButton.isHidden = !scoreButton.isHidden
-      
-       
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){
+        // game count down before it starts
+            starter = Timer.scheduledTimer(withTimeInterval: 1,  repeats:true){
+            starter in
+            self.startingCount()
+        }
+        // game session after count down complete
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+        self.gameStartUp()
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){
             timer in
             self.countDown()
             self.bubbleSpawning()
             self.despawnBubble()
-            
         }
+    })
         // Do any additional setup after loading the view.
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if (segue.identifier == "ScoreBoardViewController" ){
-            // show HighScore Screen
-            let vc = storyboard?.instantiateViewController(identifier: "ScoreBoardViewController") as! ScoreBoardViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-            vc.navigationItem.setHidesBackButton(true, animated: true)
-            
-        }
-    }
+
     
     // time countdown during game session
     @objc func countDown(){
@@ -85,26 +77,18 @@ class GameViewController: UIViewController {
         if time == 0 {
             timer.invalidate()
             coordinates.gameEnd()
-            scoreButton.isHidden = false
-            
-            
+            // redirect to score board 
+            performSegue(withIdentifier: "gameToScore", sender: self)
         }
     }
-    @IBAction func goToScoreBoard(_ sender:UIButton){
-        
-    }
     
+    // count down for start of the game
     @objc func startingCount(){
-        
         countDownStart -= 1
         countDownLabel.text = String(countDownStart)
-        
-        while countDownStart == 0 {
-            //stater.invalidate()
-       
-            
-          //  countDownLabel.isHidden = !countDownLabel.isHidden
-            
+        if countDownStart == 0 {
+            starter.invalidate()
+           countDownLabel.isHidden = !countDownLabel.isHidden
         }
     }
     
@@ -146,21 +130,22 @@ class GameViewController: UIViewController {
         sender.removeFromSuperview()
         // get bubble point value and add to score
         let value = coordinates.removeBubbleScoring(i: sender as! Bubble)
-     
         // check bubble chain
         if coordinates.checkChainLoop(colour: value.1) {
             // if there a chain multiply point value
             nobu.play()
             let add = value.0 * 1.5
-            print(add.rounded())
             score += Int(add.rounded())
+            scoreLabel.textColor = UIColor.yellow
             scoreLabel.text = String (score)
            
             // if no current chain, normal point value
         }else {
             bruh.play()
             score += Int(value.0)
+            scoreLabel.textColor = UIColor.black
         scoreLabel.text = String (score)
+            
            
         }
        
@@ -186,11 +171,12 @@ class GameViewController: UIViewController {
     }
    
     
-    // re
+    // select a random replacement of bubble coordinates
     func randomPosition(i:Bubble){
         let random = Int.random(in:0...100)
        
         switch random{
+        // upward range
         case 0...50:
             let bubble = coordinates.repostionUpward(object: i)
               while !coordinates.checkBubbleOverlap(object: bubble){
@@ -202,6 +188,7 @@ class GameViewController: UIViewController {
               }
                 
         case 51...100:
+            // downward range
                 let bubble = coordinates.repostionDownward(object:i)
                 while !coordinates.checkBubbleOverlap(object: bubble){
                     bubble.animation()
